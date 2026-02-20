@@ -27,4 +27,16 @@ A simplified insurance enterprise environment:
 1) Install DuckDB:
 ```bash
 brew install duckdb
+```
+2) Run Makefile:
+```bash
+make build
+make dq
+```
+## Key Data Quality Controls
+- Claims must map to a valid policy (referential integrity)
+- Claim incident date must fall within policy coverage window
+- Sum of payments must reconcile to loss amount (rounded to cents)
+- Loss must not exceed coverage limit (or be flagged)
+- Dimension keys are unique (prevents incorrect joins)
 
