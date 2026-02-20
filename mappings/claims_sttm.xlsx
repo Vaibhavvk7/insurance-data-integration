@@ -1,0 +1,11 @@
+| Source System | Source Field  | Target Table | Target Column   | Transformation        | Business Meaning          | Validation Rule          |
+| ------------- | ------------- | ------------ | --------------- | --------------------- | ------------------------- | ------------------------ |
+| Allstate CSV  | id            | fact_claim   | claim_id        | cast to varchar       | Unique claim identifier   | must be unique           |
+| Derived       | id % 50000    | fact_claim   | policy_id       | deterministic mapping | policy linkage            | must exist in dim_policy |
+| Allstate CSV  | loss          | fact_claim   | loss_amount     | numeric               | total claim payout        | >= 0                     |
+| Derived       | incident_date | fact_claim   | incident_date   | synthetic date        | date of loss              | within coverage window   |
+| Derived       | reported_date | fact_claim   | reported_date   | + lag                 | claim reporting date      | >= incident_date         |
+| Derived       | claim_status  | fact_claim   | claim_status    | mapping               | claim lifecycle state     | valid domain values      |
+| Derived       | claim_status  | fact_claim   | claim_stage     | stage grouping        | reporting lifecycle       | not null                 |
+| Allstate CSV  | cat*          | fact_claim   | risk_attributes | pass-through          | underwriting risk factors | optional                 |
+| Allstate CSV  | cont*         | fact_claim   | risk_metrics    | pass-through          | severity factors          | optional                 |
