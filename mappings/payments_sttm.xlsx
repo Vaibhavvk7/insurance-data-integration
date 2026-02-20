@@ -1,0 +1,6 @@
+| Source  | Field            | Target             | Column         | Transformation     | Business Meaning   | Validation  |
+| ------- | ---------------- | ------------------ | -------------- | ------------------ | ------------------ | ----------- |
+| Derived | claim_id         | fact_claim_payment | claim_id       | direct             | payment linkage    | must exist  |
+| Derived | payment_seq      | fact_claim_payment | payment_id     | concatenation      | payment identifier | unique      |
+| Derived | allocation logic | fact_claim_payment | payment_amount | split & reconcile  | disbursement       | sum = loss  |
+| Derived | incident_date    | fact_claim_payment | payment_date   | + 7 day increments | payment schedule   | >= incident |
