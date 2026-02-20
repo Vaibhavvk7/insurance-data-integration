@@ -20,10 +20,11 @@ A simplified insurance enterprise environment:
 ## Repo Structure
 - `insurance_dw/` : DuckDB database + raw CSVs
 - `sql/` : load, transformation, and reconciliation scripts
-- `mappings/` : STTM templates
+- `mappings/` : Source-to-Target Mapping (STTM) documents to document transformation logic, business definitions, and validation rules.
 - `docs/` : business rules, lineage, and DQ rules
 
 ## How to run (from repo root)
 1) Install DuckDB:
 ```bash
 brew install duckdb
+
