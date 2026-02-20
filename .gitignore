@@ -1,0 +1,16 @@
+# Python / virtual env
+.venv/
+__pycache__/
+*.pyc
+
+# DuckDB database file
+*.duckdb
+*.wal
+
+# macOS
+.DS_Store
+
+# Kaggle large CSVs (optional if >100MB)
+insurance_dw/train.csv
+insurance_dw/test.csv
+insurance_dw/sample_submission.csv
