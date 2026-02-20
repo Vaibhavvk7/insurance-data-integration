@@ -1,0 +1,9 @@
+| Source  | Source Field      | Target Table | Target Column   | Transformation | Business Meaning      | Validation    |
+| ------- | ----------------- | ------------ | --------------- | -------------- | --------------------- | ------------- |
+| Derived | id % 50000        | dim_policy   | policy_id       | grouping       | policy identifier     | unique        |
+| Derived | policy_id % 20000 | dim_policy   | customer_id     | deterministic  | insured entity        | not null      |
+| Derived | min/max incident  | dim_policy   | effective_date  | min - 30 days  | policy coverage start | <= expiration |
+| Derived | min/max incident  | dim_policy   | expiration_date | max + 30 days  | policy coverage end   | >= effective  |
+| Derived | policy_id % 3     | dim_policy   | policy_type     | mapping        | line of business      | valid values  |
+| Derived | premium formula   | dim_policy   | premium_amount  | calculation    | annual premium        | > 0           |
+| Derived | policy_id % 20    | dim_policy   | policy_status   | mapping        | lifecycle state       | valid values  |
